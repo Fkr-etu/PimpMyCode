@@ -37,6 +37,12 @@ Le choix du modèle est flexible selon les besoins de l'utilisateur local :
     *   *User Prompt :* Fournit le contexte de la classe et la liste explicite des `MemberNames` à documenter.
     *   *JSON Schema :* Utilisation de `Response Format` (si supporté par le LLM) pour garantir la structure `{ "members": [ { "name": "...", "xml": "..." } ] }`.
 
+### E. Optimisation pour LLM Local : L'Approche RAG
+Pour les modèles locaux (souvent moins volumineux en paramètres que Claude 3.5), l'ajout d'une couche de **RAG (Retrieval-Augmented Generation)** est une stratégie industrielle forte :
+*   **Base de connaissances "Frameworks" :** Injecter des fragments de documentation officielle (Clean Architecture, AutoMapper, FluentValidation) permet au LLM de produire des commentaires XML qui respectent la terminologie exacte de ces outils.
+*   **Base de connaissances "Projet" :** Rechercher des exemples de documentation déjà existants dans le projet pour assurer une cohérence de style et de ton (Few-Shot Prompting dynamique).
+*   **Implémentation :** Utilisation d'une base de vecteurs légère et locale (ex: SQLite avec extension vectorielle ou FAISS) pour ne pas dépendre d'un service cloud.
+
 ### D. Injecteur de Documentation (Roslyn `SyntaxRewriter`)
 Utilise un `CSharpSyntaxRewriter` pour insérer les commentaires XML dans l'Arbre de Syntaxe Abstraite (AST).
 *   **Précision :** Garantit que les commentaires sont placés exactement au bon endroit avec l'indentation correcte (utilisation de `SyntaxFactory.TriviaList` et `SyntaxFactory.Comment`).
