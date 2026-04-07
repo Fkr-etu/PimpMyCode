@@ -49,6 +49,12 @@ Utilise un `CSharpSyntaxRewriter` pour insérer les commentaires XML dans l'Arbr
 *   **Logique de filtrage :** Avant injection, l'outil vérifie à nouveau si le membre possède des `DocumentationCommentTrivia`. Si oui, il ignore l'injection pour ce membre (protection contre les modifications concurrentes ou erreurs de logique).
 *   **Sécurité :** Création systématique de fichiers `.bak` avant toute écriture sur le disque.
 
+### F. Synthèse du Projet & Visualisation (Architecture-as-Code)
+L'outil peut s'étendre à la génération de la documentation de haut niveau (README.md) :
+*   **Analyseur Global :** Parcourt la solution complète pour extraire la structure des projets (couches), les dépendances inter-projets et les flux de données principaux.
+*   **Générateur de Schémas (Mermaid.js) :** Traduit la structure sémantique en code Mermaid pour afficher des diagrammes d'architecture (Class Diagrams, Dependency Graphs) directement dans le Markdown.
+*   **Rédacteur de README :** Utilise le LLM pour rédiger une présentation claire du projet (Purpose, Setup, Usage) basée sur l'analyse de tous les fichiers `.csproj` et des points d'entrée (Program.cs, Controllers).
+
 ---
 
 ## 3. Workflow de Fonctionnement
