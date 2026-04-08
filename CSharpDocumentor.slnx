@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CSharpDocumentor.Tests/CSharpDocumentor.Tests.csproj" />
+  <Project Path="CSharpDocumentor/CSharpDocumentor.csproj" />
+</Solution>

@@ -65,6 +65,34 @@ By keeping the roles separate — Claude generates docs, Roslyn injects them —
 
 ---
 
+## LLM Configuration Recommendations
+
+To ensure high-quality, consistent documentation, the following settings are recommended:
+
+### 1. System Prompt
+The system prompt should establish the LLM's persona and strict output constraints.
+**Example:**
+> "You are an expert .NET software engineer specializing in clean code and documentation. Your task is to generate professional XML documentation comments for C# members.
+> - Use standard tags: <summary>, <param>, <returns>, <exception>.
+> - Keep descriptions concise but informative.
+> - For methods, describe the *intent* rather than the implementation.
+> - **Constraint:** Return ONLY a valid JSON object matching the requested schema. No conversational text, no markdown code blocks."
+
+### 2. Temperature
+- **Recommended: 0.2**
+- **Why:** Documentation requires high consistency and factual accuracy. A low temperature minimizes "hallucinations" and ensures that the LLM follows the requested JSON format strictly.
+
+### 3. Token Limits
+- **Input Tokens:** 4,000 to 8,000 (depending on class size). Truncating method bodies helps stay within these limits.
+- **Output Tokens:** 1,000 to 2,000 (sufficient for JSON mapping of documentation strings).
+
+### 4. Model Selection
+- **Claude 3.5 Sonnet:** Best for complex reasoning and following strict JSON schemas.
+- **GPT-4o:** Excellent alternative with high coding proficiency.
+- **Llama 3 (70B):** Recommended for local deployments if hardware allows.
+
+---
+
 ## Architecture
 
 ```
