@@ -1,0 +1,5 @@
+[Bb]in/
+[Oo]bj/
+*.swp
+*.bak
+test_output.txt
